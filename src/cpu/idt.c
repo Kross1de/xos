@@ -1,4 +1,3 @@
-#include "stdint.h"
 #include "../include/util.h"
 #include "../include/vga.h"
 #include "../include/idt.h"

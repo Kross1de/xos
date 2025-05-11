@@ -1,3 +1,8 @@
+#ifndef IDT_H
+#define IDT_H
+
+#include "stdint.h"
+#include "registers.h"
 
 struct idt_entry_struct{
     uint16 base_low;
@@ -16,7 +21,7 @@ void initIdt();
 void setIdtGate(uint8 num, uint32 base, uint16 sel, uint8 flags);
 
 void isr_handler(struct InterruptRegisters* regs);
-void irq_install_handler (int irq, void (*handler)(struct InterruptRegisters *r));
+void irq_install_handler(int irq, void (*handler)(struct InterruptRegisters *r));
 
 extern void isr0();
 extern void isr1();
@@ -70,3 +75,5 @@ extern void irq12();
 extern void irq13();
 extern void irq14();
 extern void irq15();
+
+#endif

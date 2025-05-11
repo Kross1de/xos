@@ -4,22 +4,30 @@
 #include "../include/vga.h"
 #include "../include/timer.h"
 
-uint64 ticks;
-const uint32 freq = 100;
+uint64 ticks = 0;
+static uint32 current_freq = 0;
 
-void onIrq0(struct InterruptRegisters *regs){
-    ticks += 1;
+void onIrq0(struct InterruptRegisters *regs) {
+    ticks++;
 }
 
-void initTimer(){
+int initTimer(uint32 freq) {
+    if (freq == 0 || freq > PIT_BASE_FREQ) {
+        return -1;
+    }
+
+    current_freq = freq;
     ticks = 0;
-    irq_install_handler(0,&onIrq0);
 
-    //119318.16666 Mhz
-    uint32 divisor = 1193180/freq;
+    irq_install_handler(0, &onIrq0);
 
-    //0011 0110
-    outPortB(0x43,0x36);
-    outPortB(0x40,(uint8)(divisor & 0xFF));
-    outPortB(0x40,(uint8)((divisor >> 8) & 0xFF));
+    uint32 divisor = PIT_BASE_FREQ / freq;
+
+    outPortB(PIT_CMD_PORT, 
+             PIT_BINARY_MODE | PIT_MODE_2 | PIT_RW_BOTH | PIT_CHANNEL0_SEL);
+
+    outPortB(PIT_CHANNEL0, (uint8)(divisor & 0xFF));
+    outPortB(PIT_CHANNEL0, (uint8)((divisor >> 8) & 0xFF));
+
+    return 0;
 }
