@@ -6,11 +6,12 @@ experemental operating system for x86 architecture
   - GDT
   - IDT
   - TSS
+  - PIT
 - Printing to screen
 - idk
 
 # TODO
-- [ ] PIT
+- [X] PIT
 - [ ] Basic PS/2 keyboard driver
 - [ ] Memory management
 - [ ] Kmalloc

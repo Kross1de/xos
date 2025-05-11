@@ -1,6 +1,9 @@
 #include "include/vga.h"
 #include "include/gdt.h"
 #include "include/idt.h"
+#include "include/timer.h"
+
+extern uint64 ticks;
 
 void kmain(void);
 
@@ -14,5 +17,6 @@ void kmain(void){
        print("GDT is done!\r\n");
        initIdt();
        print("IDT is done!\r\n");
-       print(1/0);
+       initTimer();
+       print("Timer is initialized!\r\n");
 }

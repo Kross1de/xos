@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "gdt.h": "c",
-    "vga.h": "c"
+    "vga.h": "c",
+    "util.h": "c"
   }
 }
