@@ -1,6 +1,6 @@
-
 #include "include/vga.h"
 #include "include/gdt.h"
+#include "include/idt.h"
 
 void kmain(void);
 
@@ -12,4 +12,6 @@ void kmain(void){
        print("\t\t\t\t\t\t===============================\r\n");
        initGdt();
        print("GDT is done!\r\n");
+       initIdt();
+       print("IDT is done!\r\n");
 }
