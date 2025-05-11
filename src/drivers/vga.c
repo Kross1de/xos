@@ -4,7 +4,7 @@ uint16 column = 0;
 uint16 line = 0;
 uint16* const vga = (uint16* const)0xb8000;
 const uint16 defaultColor = (COLOR8_WHITE << 8) | (COLOR8_BLACK << 12);
-uint16 currentColor = defaultColor;
+uint16 currentColor;
 
 void Reset(){
        line = 0;

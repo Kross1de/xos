@@ -14,4 +14,5 @@ void kmain(void){
        print("GDT is done!\r\n");
        initIdt();
        print("IDT is done!\r\n");
+       print(1/0);
 }

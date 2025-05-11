@@ -1,3 +1,6 @@
+#ifndef UTIL_H
+#define UTIL_H
+
 #include "stdint.h"
 
 void memset(void *dest, char val, uint32 count);
@@ -10,3 +13,5 @@ struct InterruptRegisters{
   uint32 int_no, err_code;
   uint32 eip, cs, eflags, useresp, ss;
 };
+
+#endif

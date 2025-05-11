@@ -1,16 +1,18 @@
-CFLAGS = -m32 -fno-stack-protector -fno-builtin
+gcc = i686-elf-gcc
+CFLAGS = -ffreestanding -Wall -Wextra -g -O2
 
 all: clean kernel boot image
 
 clean:
 	rm -rf *.o
+	rm -rf *.iso
 
 kernel:
-	gcc $(CFLAGS) -c src/main.c -o obj/main.o
-	gcc $(CFLAGS) -c src/drivers/vga.c -o obj/vga.o
-	gcc $(CFLAGS) -c src/cpu/gdt.c -o obj/gdt.o
-	gcc $(CFLAGS) -c src/utils/basic/util.c -o obj/util.o
-	gcc $(CFLAGS) -c src/cpu/idt.c -o obj/idt.o
+	$(gcc) $(CFLAGS) -c src/main.c -o obj/main.o
+	$(gcc) $(CFLAGS) -c src/drivers/vga.c -o obj/vga.o
+	$(gcc) $(CFLAGS) -c src/cpu/gdt.c -o obj/gdt.o
+	$(gcc) $(CFLAGS) -c src/utils/basic/util.c -o obj/util.o
+	$(gcc) $(CFLAGS) -c src/cpu/idt.c -o obj/idt.o
 
 boot:
 	nasm -f elf32 src/boot.s -o obj/boot.o

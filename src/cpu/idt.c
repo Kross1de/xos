@@ -1,7 +1,6 @@
 #include "../include/idt.h"
 #include "../include/util.h"
 #include "../include/vga.h"
-#include "../include/idt.h"
 
 struct idt_entry idt_entries[256];
 struct idt_ptr idt_ptr;
@@ -91,7 +90,7 @@ void setIdtGate(uint8 num, uint32 base, uint16 sel, uint8 flags){
   idt_entries[num].flags = flags | 0x60;
 }
 
-unsigned char* exception_messages[] = {
+const char* exception_messages[] = {
     "Division By Zero",
     "Debug",
     "Non Maskable Interrupt",
@@ -142,7 +141,7 @@ void *irq_routines[16] = {
 
 
 void irq_install_handler (int irq, void (*handler)(struct InterruptRegisters *r)){
-  irq_routines[irq] = 0;
+  irq_routines[irq] = handler;
 }
 
 void irq_uninstall_handler(int irq){
